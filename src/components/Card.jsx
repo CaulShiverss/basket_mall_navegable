@@ -24,7 +24,7 @@ function Card(props) {
                 hover:scale-105 
                 h-full
             "
-            aria-label={`${nombre}`} // Etiqueta accesible con el nombre del intérprete/película
+            aria-label={`${nombre}`} // Etiqueta accesible con el nombre
         >
             {/* Imagen representativa del recurso */}
             <figure className="w-full aspect-square rounded-lg bg-gray-100 overflow-hidden">

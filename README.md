@@ -1,16 +1,65 @@
-# React + Vite
+# BasketMall Navegable - Justificaciones
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Sergio Llorente
 
-Currently, two official plugins are available:
+### Usabilidad
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Para garantizar la usabilidad de la aplicación me he asegurado de seguir unos estilos coherentes y claros para el usuario. 
 
-## React Compiler
+#### Header para navegación
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+<img width="1917" height="325" alt="image" src="https://github.com/user-attachments/assets/1c02fc01-bb78-4dd4-81d1-47de971c68d6" />
 
-## Expanding the ESLint configuration
+#### Botón para volver atrás
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<img width="845" height="380" alt="image" src="https://github.com/user-attachments/assets/a289c452-bd14-4103-a4c3-1172f1198b44" />
+
+### Accesibilidad
+
+Para la accesibilidad he añadido los siguientes aspectos a mi web:
+
+#### Navegación por tabs
+
+<img width="1910" height="885" alt="image" src="https://github.com/user-attachments/assets/15ca2028-d8e6-49df-81c4-a6cea14e47e7" />
+
+#### Uso de elementos semánticos y aria-labels
+
+```js
+<article
+            className="
+                flex flex-col items-start gap-3 
+                p-4 
+                rounded-lg 
+                bg-gray-100 
+                shadow-md 
+                hover:shadow-lg 
+                transition-transform duration-300 
+                hover:scale-105 
+                h-full
+            "
+            aria-label={`${nombre}`} // Etiqueta accesible con el nombre del intérprete/película
+        >
+            {/* Imagen representativa del recurso */}
+            <figure className="w-full aspect-square rounded-lg bg-gray-100 overflow-hidden">
+                <img
+                    src={foto}
+                    alt={`Foto de ${nombre}`} // Texto alternativo accesible
+                    loading="lazy"            // Optimización de rendimiento
+                    className="w-full h-full object-cover"
+                />
+
+                {/* Figcaption oculto visualmente, útil si children añade significado */}
+                <figcaption className="sr-only">
+                    {props.children}
+                </figcaption>
+            </figure>
+```
+
+#### Compatibilidad con lector de pantalla
+
+<img width="1860" height="771" alt="image" src="https://github.com/user-attachments/assets/59fdaf3c-931d-4702-b117-69b622192eaa" />
+
+
+
+
+

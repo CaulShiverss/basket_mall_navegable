@@ -1,0 +1,75 @@
+/**
+ * Componente Details
+ * -------------------
+ * Muestra la información detallada de un producto/película específico.
+ *
+ * - Obtiene el id de la URL mediante useParams() de react-router-dom.
+ * - Busca el producto en la lista `productosBasket` usando el id.
+ * - Estructura la página usando GridLayout para mantener consistencia de diseño.
+ * - Incluye un BackButton para volver a la página anterior.
+ * - La sección de detalles incluye imagen, nombre, categoría, precio y descripción.
+ * - Muestra un mensaje accesible si el producto no se encuentra.
+ * - Usa clases personalizadas y Tailwind para estilos y responsividad.
+ */
+
+import BackButton from "../components/BackButton";
+import GridLayout from "../components/GridLayout";
+import productosBasket from "../data/productos";
+import { useParams } from "react-router-dom";
+
+function Details() {
+  const { id } = useParams();                     // Obtiene el id desde la ruta
+  const producto = productosBasket[id];           // Busca el producto correspondiente
+
+  return (
+    <GridLayout titulo="">
+      {/* Navegación secundaria: botón de volver */}
+      <nav
+        className="w-full flex justify-start mb-4"
+        aria-label="Navegación secundaria"
+      >
+        <BackButton />
+      </nav>
+
+      <article aria-label="Product details">
+        {producto ? (
+          <section className="mt-4 flex flex-col items-center lg:flex-row lg:items-start gap-20">
+            {/* Imagen del producto */}
+            <figure className="w-full max-w-xl sm:w-1/2 lg:w-1/3">
+              <img
+                src={producto.imagen}
+                alt={`Cartelera de la película ${producto.nombre}`} // Texto alternativo accesible
+                className="w-full rounded-lg mb-4"
+              />
+              <figcaption className="sr-only">
+                Cartel de {producto.nombre}
+              </figcaption>
+            </figure>
+
+            {/* Datos del producto */}
+            <section className="product-details">
+              <ul className="product-details__list space-y-2">
+                <li className="font-heading-h2">{producto.nombre}</li>
+                <li className="product-details__category">
+                  {producto.categoria}
+                </li>
+                <li className="font-heading-h2">{producto.precio} €</li>
+              </ul>
+
+              <p className="product-details__description body-text mt-2">
+                {producto.descripcion}
+              </p>
+            </section>
+          </section>
+        ) : (
+          // Mensaje en caso de producto no encontrado
+          <p className="body-text">
+            Lo sentimos, no se encontró la película solicitada.
+          </p>
+        )}
+      </article>
+    </GridLayout>
+  );
+}
+
+export default Details;

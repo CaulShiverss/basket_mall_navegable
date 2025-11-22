@@ -1,33 +1,51 @@
-import ProductGrid from "./ProductGrid";
-import ProductCard from "./ProductCard";
-import productosBasket from "./data/productos"; // tu nuevo array de productos
+/**
+ * Componente App
+ * ----------------
+ * Componente principal de la aplicación que define la estructura global y
+ * el enrutamiento de las páginas.
+ *
+ * - Incluye <Header /> y <Footer /> para mantener consistencia en todas las páginas.
+ * - Usa <Routes> y <Route> de react-router-dom para definir rutas y layouts.
+ * - <Container /> envuelve el contenido principal de cada página para
+ *   aplicar estilos y estructura común.
+ * - Permite navegación fluida sin recargar la página y soporte para rutas dinámicas.
+ */
+
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Container from "./components/Container";
+import HomePage from "./pages/HomePage";
+import ProductsPage from "./pages/ProductsPage";
+import Footer from "./components/Footer";
+import Details from "./pages/Details";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
+    <>
+      {/* Encabezado global */}
+      <Header />
 
-    <ProductGrid titulo="Productos" className="max-w-7xl mx-auto px-8 py-12">
+      {/* Rutas principales */}
+      <Routes>
+        {/* Contenedor común para todas las páginas */}
+        <Route element={<Container />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/productos" element={<ProductsPage />} />
+          <Route path="/productos/:id" element={<Details />} />
+          <Route path="/admin" element={<AdminPage />} />
 
-      <p className="body-text text-lg mb-10 text-gray-700">
-        Catálogo de artículos disponibles:
-      </p>
+          {/* Ruta comodín para páginas no encontradas */}
+          <Route
+            path="*"
+            element={<p className="body-text">Página no encontrada</p>}
+          />
+        </Route>
+      </Routes>
 
-
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full mt-10 justify-items-center">
-        {productosBasket.map((producto, index) => (
-
-          <ProductCard
-            key={index}
-            nombre={producto.nombre}
-            foto={producto.imagen}
-            categoria={producto.categoria}
-            precio={producto.precio}
-          >
-            {producto.descripcion}
-          </ProductCard>
-
-        ))}
-      </section>
-    </ProductGrid>
+      {/* Pie de página global */}
+      <Footer />
+    </>
   );
 }
 
